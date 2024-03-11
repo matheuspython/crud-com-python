@@ -10,7 +10,7 @@ conexao= mysql.connector.connect(
 cursor = conexao.cursor()
 
 def create(name, value):
-  comando = f'INSERT into vendas (nome_produto, valor) VALUES ("{nome}", "{value}")'#
+  comando = f'INSERT into vendas (nome_produto, valor) VALUES ("{name}", "{value}")'#
   cursor.execute(comando)#executa comando
   readDatabase()
 
@@ -21,17 +21,20 @@ def readDatabase():
   print(resultado)
 
 def updateDatabase(name, value):
-  comando = f'UPDATE vendas SET valor = {value} WHERE nome_produto = {name}'
+  comando = f'UPDATE vendas SET valor = {value} WHERE nome_produto = "{name}"'
+  cursor = conexao.cursor()
   cursor.execute(comando)
-  conexao.commit()
+  
   readDatabase()
  
-def delete(name, value):
-  comando - f'DELETE FROM vendas where nome_produto = {name}'
+def delete(name):
+  comando = f'DELETE FROM vendas where nome_produto = "{name}"'
+  cursor = conexao.cursor()
   cursor.execute(comando)
   conexao.commit()
   readDatabase()
   
-  
+   
+
 cursor.close()
 conexao.close()
